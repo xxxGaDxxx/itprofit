@@ -1,29 +1,53 @@
-
-const buttonElem = document.getElementById('openModalBtn');
-const modalElem = document.querySelector('.modal');
-const modalTitle = modalElem.querySelector('.modal-title');
-const modalDescription = modalElem.querySelector('.modal-description');
+export const createModal = ({title, description}) => {
+	const modalElem = document.createElement('div');
+	modalElem.className = 'modal';
 	
-	const closeModal = (event) => {
-		const target = event.target;
-		if (target === modalElem || target.closest('.modal-close')) {
-			modalElem.style.opacity = 0;
-			document.body.classList.remove("modal-open");
-			
-			setTimeout(() => {
-				modalElem.classList.remove('modal-open');
-			}, 300);
-		}
-	};
-	const openModal = () => {
+	const modalMain = document.createElement('div');
+	modalMain.className = 'modal-main';
+	
+	const modalContainer = document.createElement('div');
+	modalContainer.className = 'modal-container';
+	
+	const modalClose = document.createElement('button');
+	modalClose.className = 'modal-close';
+	modalClose.innerHTML = '&#10006;';
+	
+	const modalDescription = document.createElement('p');
+	modalDescription.className = 'modal-description';
+	modalDescription.textContent = description;
+	
+	const modalTitle = document.createElement('h2');
+	modalTitle.className = 'modal-title';
+	modalTitle.textContent = title;
+	
+	modalMain.appendChild(modalTitle);
+	modalContainer.appendChild(modalDescription);
+	modalMain.appendChild(modalContainer);
+	modalMain.appendChild(modalClose);
+	modalElem.appendChild(modalMain);
+	
+	setTimeout(() => {
 		modalElem.style.opacity = 1;
 		modalElem.classList.add('modal-open');
 		document.body.classList.add("modal-open");
+	}, 0)
+	
+	
+	const closeModal = () => {
+		modalElem.style.opacity = 0;
 		
-		modalTitle.textContent = 'Привет!';
-		modalDescription.textContent = 'Отправишь сообщение? 😉';
+		setTimeout(() => {
+			modalElem.classList.remove('modal-open');
+			modalElem.remove();
+		}, 300);
 	};
 	
-	buttonElem.addEventListener('click', openModal);
-	modalElem.addEventListener('click', closeModal);
+	modalClose.addEventListener('click', closeModal);
+	modalElem.addEventListener('click', (event) => {
+		if (event.target === modalElem) {
+			closeModal();
+		}
+	});
 	
+	return modalElem;
+};
