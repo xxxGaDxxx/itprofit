@@ -18,10 +18,11 @@ export function handleResponse(response) {
 		modalElem.style.opacity = 0;
 		modalElem.classList.remove('modal-open');
 	}
-
-
+	
 	const modalTitle = document.querySelector('.modal-title');
 	const modalDescription = document.querySelector('.modal-description');
+	const feedbackForm = document.getElementById('feedback-form');
+	
 	if (response.status === 'error') {
 		modalTitle.textContent = 'Что-то пошло не так...';
 		modalDescription.textContent = response.message;
@@ -29,6 +30,7 @@ export function handleResponse(response) {
 	if (response.status === 'success') {
 		modalTitle.textContent = 'Запрос отправлен!';
 		modalDescription.textContent = 'Пожалуйста, дождитесь ответа ответа.';
+		feedbackForm.reset()
 	}
 
 
