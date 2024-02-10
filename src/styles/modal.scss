@@ -1,0 +1,63 @@
+.modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  display: flex;
+  padding: 15px;
+  overflow-y: auto;
+  z-index: 100;
+  visibility: hidden;
+  transition: opacity 300ms ease-in-out;
+}
+
+.modal-main {
+  position: relative;
+  max-width: 600px;
+  background-color: azure;
+  color: #000;
+  border-radius: 15px;
+  padding: 30px;
+  margin: auto;
+  cursor: default;
+}
+
+.modal-title {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.modal-open {
+  visibility: visible;
+  opacity: 1;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+
+.modal-close {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 27px;
+  height: 27px;
+  right: 10px;
+  top: 10px;
+  padding: 0;
+  border-radius: 3px;
+  background-color: transparent;
+  border: none;
+  outline: 1px solid transparent;
+  cursor: pointer;
+  font-size: 22px;
+  outline-offset: 3px;
+  transition: outline-color .15s ease-in-out;
+
+  &:focus-visible {
+    outline-color: #000;
+  }
+}
+
